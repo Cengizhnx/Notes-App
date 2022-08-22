@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+.chakra-ui-light {
+  background-color: lightsteelblue;
+
+}
+
+.headerText {
+  font-family: cursive;
+}
+
+.textareaSize {
+  resize: none;
+}
