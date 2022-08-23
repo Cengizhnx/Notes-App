@@ -27,7 +27,7 @@ function Notes() {
                             {
                                 item.completed === true
                                     ? <span className="inline-flex text-white items-center italic justify-center py-2 px-3 bg-green-600 rounded-md shadow-lg">Completed </span>
-                                    : <span onClick={() => handleToggle(item.id)} className={`inline-flex text-white items-center italic justify-center py-2 px-3 ${item.color} rounded-md shadow-lg cursor-pointer`}>#{item.id}</span>
+                                    : <span onClick={() => handleToggle(item.id)} className={`inline-flex text-white items-center italic justify-center py-2 px-3 ${item.color} rounded-md shadow-lg cursor-pointer`}>Not Completed</span>
                             }
                         </div>
                         <h3 className="text-slate-900 mt-3 font-medium">{item.title}</h3>
