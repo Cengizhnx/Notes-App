@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addNote, getColors, checkedChange } from '../redux/notes/notesSlice';
 
@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 
 
 function Form() {
+    let completed = false;
 
     const colors = useSelector(getColors)
 
@@ -34,7 +35,7 @@ function Form() {
         }
         else {
             toast.success("Note Added")
-            dispatch(addNote({ title, description, color }))
+            dispatch(addNote({ title, description, color, completed }))
         }
     }
 

@@ -1,35 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-let noteId = 3;
+
 let checked;
 export const notesSlice = createSlice({
     name: "notes",
     initialState: {
-        items: [
-            {
-                id: "1",
-                title: "Learn React",
-                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                color: "bg-indigo-600",
-                completed: true
-            },
-            {
-                id: "2",
-                title: "Examples Redux",
-                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                color: "bg-indigo-600",
-                completed: false
-            },
-            {
-                id: "3",
-                title: "Read A Book",
-                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                color: "bg-indigo-600",
-                completed: false
+        items: localStorage.getItem("notes")
+            ? JSON.parse(localStorage.getItem("notes"))
+            : [
+                {
+                    id: "1",
+                    title: "Learn React",
+                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                    color: "bg-indigo-600",
+                    completed: true
+                },
+                {
+                    id: "2",
+                    title: "Examples Redux",
+                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                    color: "bg-indigo-600",
+                    completed: true
+                },
+                {
+                    id: "3",
+                    title: "Read A Book",
+                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                    color: "bg-indigo-600",
+                    completed: true
+                },
 
-            },
-
-        ],
+            ],
         colors: [
             [
                 "bg-gray-600",
@@ -78,14 +79,16 @@ export const notesSlice = createSlice({
         addNote: {
             reducer: (state, action) => {
                 state.items.push(action.payload)
+                localStorage.setItem("notes", JSON.stringify(state.items));
             },
-            prepare: ({ title, description, color }) => {
+            prepare: ({ title, description, color, completed }) => {
                 return {
                     payload: {
-                        id: noteId += 1,
+                        id: nanoid(),
                         title,
                         description,
-                        color
+                        color,
+                        completed: completed
                     }
                 }
             }
@@ -94,8 +97,15 @@ export const notesSlice = createSlice({
         toggle: (state, action) => {
             const id = action.payload
 
-            const item = state.items.find((item) => item.id === id)
-            item.completed = !item.completed;
+            const local = JSON.parse(localStorage.getItem("notes"))
+            
+            const item = local.find((item) => item.id === id)
+
+            const response = item.completed = !item.completed;
+            localStorage.setItem("notes", JSON.stringify([...local], item.completed = response))
+
+            window.location.reload(false);
+
         },
         checkedChange: (state, action) => {
             const clr = action.payload
