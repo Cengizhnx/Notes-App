@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addNote, getColors } from '../redux/notes/notesSlice';
+import { addNote, getColors, checkedChange } from '../redux/notes/notesSlice';
 
 import { Button } from '@chakra-ui/react'
 import { BsClipboardCheck } from 'react-icons/bs';
@@ -17,6 +17,14 @@ function Form() {
     const [color, setColor] = useState("bg-indigo-600")
 
     const dispatch = useDispatch()
+
+    console.log(colors);
+
+    const handleChecked = (item) => {
+        if (item) {
+            dispatch(checkedChange(item))
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,8 +54,9 @@ function Form() {
                             <div key={key} className='mt-2'>
                                 <button onClick={(e) => {
                                     e.preventDefault()
-                                    setColor(item)
-                                }} className={`inline-flex text-white items-center italic justify-center p-4 rounded-full shadow-lg ${item}`}></button>
+                                    setColor(item[0])
+                                    handleChecked(item[0])
+                                }} className={`inline-flex text-white items-center italic justify-center p-4 rounded-full shadow-lg ${item[0]} ${item[0] === color && item[1] === true ? "border-2 border-black" : ""}`}></button>
                             </div>
                         ))
                     }

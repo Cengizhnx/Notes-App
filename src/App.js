@@ -1,19 +1,19 @@
 import './App.css';
 import Header from './components/Header';
-// import Search from './components/Search';
+import Search from './components/Search';
 import Form from './components/Form';
 import Notes from './components/Notes';
 
 function App() {
   return (
     <>
-      <div className='flex flex-row'>
-        <div className="App mx-10 flex justify-center items-center flex-col">
+      <div className='flex flex-row h-full'>
+        <div className="App ml-16 flex items-center flex-col">
           <Header></Header>
-          {/* <Search></Search> */}
           <Form></Form>
         </div>
-        <div className="App flex items-center mt-5 flex-col">
+        <div className="App w-3/4 flex items-center mx-10 mt-5 mb-10 flex-col">
+          <Search></Search>
           <Notes></Notes>
         </div>
       </div>

@@ -1,9 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getNotes, toggle } from '../redux/notes/notesSlice'
+import { getNotes, toggle, getFilter } from '../redux/notes/notesSlice'
 
 function Notes() {
 
     const items = useSelector(getNotes)
+
+    const keyFilter = useSelector(getFilter)
+
+    const filtered = items.filter((item) => item.title.toLowerCase().includes(keyFilter.toLowerCase())
+    )
 
     const dispatch = useDispatch()
 
@@ -13,13 +18,11 @@ function Notes() {
         }
     }
 
-    console.log(items);
-
     return (
         < div className='flex flex-wrap' >
             {
-                items.map((item, key) => (
-                    <div key={key} className="bg-white w-72 rounded-lg mt-5 ml-5 px-6 pt-5 pb-8 ring-1 ring-slate-900/5 shadow-xl">
+                filtered.map((item, key) => (
+                    <div key={key} className="bg-white w-72 rounded-lg mt-5 mx-5 px-6 pt-5 pb-8 ring-1 ring-slate-900/5 shadow-xl">
                         <div>
                             {
                                 item.completed === true

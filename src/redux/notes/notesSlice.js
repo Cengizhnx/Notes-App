@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let noteId = 3;
-
+let checked;
 export const notesSlice = createSlice({
     name: "notes",
     initialState: {
@@ -31,18 +31,48 @@ export const notesSlice = createSlice({
 
         ],
         colors: [
-            "bg-gray-600",
-            "bg-neutral-400",
-            "bg-red-600",
-            "bg-amber-500",
-            "bg-lime-500",
-            "bg-emerald-600",
-            "bg-sky-500",
-            "bg-indigo-600",
-            "bg-fuchsia-600",
-            "bg-yellow-300"
-        ]
-
+            [
+                "bg-gray-600",
+                checked = false,
+            ],
+            [
+                "bg-neutral-400",
+                checked = false,
+            ],
+            [
+                "bg-red-600",
+                checked = false,
+            ],
+            [
+                "bg-amber-500",
+                checked = false,
+            ],
+            [
+                "bg-lime-500",
+                checked = false,
+            ],
+            [
+                "bg-emerald-600",
+                checked = false,
+            ],
+            [
+                "bg-sky-500",
+                checked = false,
+            ],
+            [
+                "bg-indigo-600",
+                checked = false,
+            ],
+            [
+                "bg-fuchsia-600",
+                checked = false,
+            ],
+            [
+                "bg-yellow-300",
+                checked = false,
+            ],
+        ],
+        keywordFilter: "",
     },
     reducers: {
         addNote: {
@@ -62,18 +92,28 @@ export const notesSlice = createSlice({
 
         },
         toggle: (state, action) => {
-            const  id  = action.payload
-            console.log(id);
+            const id = action.payload
 
             const item = state.items.find((item) => item.id === id)
             item.completed = !item.completed;
+        },
+        checkedChange: (state, action) => {
+            const clr = action.payload
+
+            const items = state.colors.find((item) => item[0] === clr)
+            items[1] = !items[1]
+        },
+        searchNote: (state, action) => {
+            state.keywordFilter = action.payload
         }
+
     }
 })
 
 export const getNotes = (state) => state.notes.items;
 export const getColors = (state) => state.notes.colors;
+export const getFilter = (state) => state.notes.keywordFilter;
 
-export const { addNote, toggle } = notesSlice.actions;
+export const { addNote, toggle, checkedChange, searchNote } = notesSlice.actions;
 
 export default notesSlice.reducer;
