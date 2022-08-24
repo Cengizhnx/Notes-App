@@ -1,3 +1,25 @@
+## React - Redux Notes APP
+
+🗒️ Notes APP:
+
+- React
+- Redux
+- Local Storage
+
+<hr>
+
+- ✨ [Tailwind CSS](https://tailwindcss.com/docs/guides/create-react-app)
+- ✨ [Chakra UI](https://chakra-ui.com/getting-started)
+
+<hr>
+
+- Note Add ✔️
+- Note Search ✔️
+- Note State Change (Not Completed, Completed) ✔️
+- Color Select ✔️
+
+![N|Solid](src/asssets/ss.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
